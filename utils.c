@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:42:19 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:54 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:13:16 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
-}
-
-void	ft_puterr(char err)
-{
-	write(2, &err, 1);
 }
 
 void	ft_putnbr(int nbr)
@@ -37,6 +32,15 @@ void	ft_putnbr(int nbr)
 	if (nbr >= 10)
 		ft_putnbr(nbr / 10);
 	ft_putchar(nbr % 10 + '0');
+}
+
+void	ft_puterr(char *err)
+{
+	while (*err)
+	{
+		write(2, &err, 1);
+		err++;
+	}
 }
 
 void	ft_putstr(char *str)

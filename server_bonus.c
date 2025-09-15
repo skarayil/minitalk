@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:59:50 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:54 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:03:52 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	main(int ac, char *av[])
 	(void)av;
 	if (ac != 1)
 	{
-		ft_puterr("Usage: ./server\n");
+		ft_puterr(RED "Usage: ./server\n" RESET);
 		return (1);
 	}
-	ft_putstr("╔══════════════════════════════════╗\n");
-	ft_putstr("║      MINITALK BONUS SERVER       ║\n");
-	ft_putstr("╚══════════════════════════════════╝\n\n");
+	ft_putstr(CYAN "╔══════════════════════════════════╗\n" RESET);
+	ft_putstr(CYAN "║      MINITALK BONUS SERVER       ║\n" RESET);
+	ft_putstr(CYAN "╚══════════════════════════════════╝\n\n" RESET);
 	ft_putstr("Server PID: ");
 	ft_putnbr(getpid());
 	ft_putstr("\n\n");
