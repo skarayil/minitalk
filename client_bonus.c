@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:50:26 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:35:50 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_send_string(int pid, char *str)
 	ft_send_char(pid, '\0');
 }
 
-void	ft_sig_handler(int signo, siginfo_t *siginfo, void *oact)
+void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
 {
 	static int	send_byte;
 
@@ -51,7 +51,7 @@ void	ft_sig_handler(int signo, siginfo_t *siginfo, void *oact)
 	(void)oact;
 	if (signo == SIGUSR2)
 	{
-		ft_putstr_fd("\r Send byte :", 1);
+		ft_putstr_fd(MAGENTA "\r Send byte : " RESET, 1);
 		ft_putnbr(++send_byte);
 	}
 }
@@ -73,10 +73,11 @@ int	main(int ac, char *av[])
 		return (1);
 	}
 	sig.sa_flags = SA_SIGINFO;
-	sig.sa_sigaction = ft_sig_handler;
+	sig.sa_sigaction = ft_signal_handler;
 	sigemptyset(&sig.sa_mask);
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
 	ft_send_string(pid, av[2]);
+	ft_putchar_fd('\n', 1);
 	return (0);
 }

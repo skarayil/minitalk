@@ -6,16 +6,17 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:51:31 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:44:06 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 21:25:46 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_BONUS_H
 # define MINITALK_BONUS_H
 
-# define CYAN "\033[0;36m"
-# define RED "\033[0;31m"
 # define RESET "\033[0m"
+# define RED "\033[0;31m"
+# define CYAN "\033[0;36m"
+# define MAGENTA "\033[0;35m"
 
 # include <signal.h>
 # include <stdlib.h>
