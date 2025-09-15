@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:59:50 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 19:31:06 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:58:54 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int ac, char *av[])
 	(void)av;
 	if (ac != 1)
 	{
-		ft_puterror("Usage: ./server\n");
+		ft_puterr("Usage: ./server\n");
 		return (1);
 	}
 	ft_putstr("╔══════════════════════════════════╗\n");
