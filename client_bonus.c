@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 14:34:35 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:33:24 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,53 +43,40 @@ void	ft_send_string(int pid, char *str)
 	ft_send_char(pid, '\0');
 }
 
-void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
+void	ft_sig_handler(int signo, siginfo_t *siginfo, void *oact)
 {
-	static int			send_byte;
-	struct sigaction	sig;
+	static int	send_byte;
 
-	if (!signo)
-	{
-		sig.sa_flags = SA_SIGINFO;
-		sig.sa_sigaction = ft_signal_handler;
-		sigemptyset(&sig.sa_mask);
-		sigaction(SIGUSR1, &sig, NULL);
-		sigaction(SIGUSR2, &sig, NULL);
-		return ;
-	}
 	(void)siginfo;
 	(void)oact;
 	if (signo == SIGUSR2)
 	{
-		ft_putstr("\r✓ Send byte :");
+		ft_putstr("\r Send byte :");
 		ft_putnbr(++send_byte);
 	}
 }
 
 int	main(int ac, char *av[])
 {
-	pid_t	pid;
+	pid_t				pid;
+	struct sigaction	sig;
 
 	if (ac != 3)
 	{
-		ft_putstr("Usage: ./client <PID> <message>\n");
+		ft_puterror("Usage: ./client <PID> <message>\n");
 		return (1);
 	}
-	ft_putstr("╔══════════════════════════════════╗\n");
-	ft_putstr("║      MINITALK BONUS CLIENT       ║\n");
-	ft_putstr("╚══════════════════════════════════╝\n\n");
 	pid = ft_atoi(av[1]);
-	if (pid <= 0)
+	if (kill(pid, 0) == -1 || pid <= 0)
 	{
-		ft_putstr("Error: Invalid PID\n");
+		ft_puterror("Error: Invalid PID\n");
 		return (1);
 	}
-	if (kill(pid, 0) == -1)
-	{
-		ft_putstr("Error: Invalid PID\n");
-		return (1);
-	}
-	ft_signal_handler(0, NULL, NULL);
+	sig.sa_flags = SA_SIGINFO;
+	sig.sa_sigaction = ft_sig_handler;
+	sigemptyset(&sig.sa_mask);
+	sigaction(SIGUSR1, &sig, NULL);
+	sigaction(SIGUSR2, &sig, NULL);
 	ft_send_string(pid, av[2]);
 	return (0);
 }

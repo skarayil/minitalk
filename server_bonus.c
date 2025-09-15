@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:59:50 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 14:25:20 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:31:06 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
 	{
 		ft_putchar(byte);
 		if (byte == '\0')
-		{
 			ft_putchar('\n');
-			bit = 0;
-			byte = 0;
-			kill(pid, SIGUSR2);
-		}
+		bit = 0;
+		byte = 0;
+		kill(pid, SIGUSR2);
 	}
 }
 
@@ -47,7 +45,7 @@ int	main(int ac, char *av[])
 	(void)av;
 	if (ac != 1)
 	{
-		ft_putstr("Usage: ./server\n");
+		ft_puterror("Usage: ./server\n");
 		return (1);
 	}
 	ft_putstr("╔══════════════════════════════════╗\n");

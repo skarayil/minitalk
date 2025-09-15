@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:42:19 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/14 21:05:18 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:30:02 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
+}
+
+void	ft_puterror(char err)
+{
+	write(2, &err, 1);
 }
 
 void	ft_putnbr(int nbr)
@@ -69,4 +74,3 @@ int	ft_atoi(const char *str)
 		return (0);
 	return (sign * res);
 }
-
