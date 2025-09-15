@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 21:35:50 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/16 01:46:17 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
 	(void)siginfo;
 	(void)oact;
 	if (signo == SIGUSR2)
-	{
-		ft_putstr_fd(MAGENTA "\r Send byte : " RESET, 1);
-		ft_putnbr(++send_byte);
-	}
+		ft_putstr_fd(MAGENTA "\rSent Bytes: " RESET, 1);
+	ft_putnbr(send_byte++);
 }
 
 int	main(int ac, char *av[])
@@ -69,15 +67,17 @@ int	main(int ac, char *av[])
 	pid = ft_atoi(av[1]);
 	if (kill(pid, 0) == -1 || pid <= 0)
 	{
-		ft_putstr_fd(RED "err: Invalid PID\n" RESET, 2);
+		ft_putstr_fd(RED "Invalid PID!\n" RESET, 2);
 		return (1);
 	}
+	ft_putstr_fd(MAGENTA "PID: " RESET, 1);
+	ft_putnbr(pid);
+	ft_putstr_fd(MAGENTA "\nMessage: \"" RESET, 1);
 	sig.sa_flags = SA_SIGINFO;
 	sig.sa_sigaction = ft_signal_handler;
 	sigemptyset(&sig.sa_mask);
-	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
 	ft_send_string(pid, av[2]);
-	ft_putchar_fd('\n', 1);
+	ft_putstr_fd(MAGENTA "\nMessage delivered!\n" RESET, 1);
 	return (0);
 }
