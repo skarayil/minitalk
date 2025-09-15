@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:13:16 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:50:26 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_sig_handler(int signo, siginfo_t *siginfo, void *oact)
 	(void)oact;
 	if (signo == SIGUSR2)
 	{
-		ft_putstr("\r Send byte :");
+		ft_putstr_fd("\r Send byte :", 1);
 		ft_putnbr(++send_byte);
 	}
 }
@@ -63,13 +63,13 @@ int	main(int ac, char *av[])
 
 	if (ac != 3)
 	{
-		ft_puterr(RED "Usage: ./client <PID> <message>\n" RESET);
+		ft_putstr_fd(RED "Usage: ./client <PID> <message>\n" RESET, 2);
 		return (1);
 	}
 	pid = ft_atoi(av[1]);
 	if (kill(pid, 0) == -1 || pid <= 0)
 	{
-		ft_puterr(RED "err: Invalid PID\n" RESET);
+		ft_putstr_fd(RED "err: Invalid PID\n" RESET, 2);
 		return (1);
 	}
 	sig.sa_flags = SA_SIGINFO;

@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:59:50 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:03:52 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:49:59 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
 	bit++;
 	if (bit == 8)
 	{
-		ft_putchar(byte);
+		ft_putchar_fd(byte, 1);
 		if (byte == '\0')
-			ft_putchar('\n');
+			ft_putchar_fd('\n', 1);
 		bit = 0;
 		byte = 0;
 		kill(pid, SIGUSR2);
@@ -45,15 +45,15 @@ int	main(int ac, char *av[])
 	(void)av;
 	if (ac != 1)
 	{
-		ft_puterr(RED "Usage: ./server\n" RESET);
+		ft_putstr_fd(RED "Usage: ./server\n" RESET, 2);
 		return (1);
 	}
-	ft_putstr(CYAN "╔══════════════════════════════════╗\n" RESET);
-	ft_putstr(CYAN "║      MINITALK BONUS SERVER       ║\n" RESET);
-	ft_putstr(CYAN "╚══════════════════════════════════╝\n\n" RESET);
-	ft_putstr("Server PID: ");
+	ft_putstr_fd(CYAN "╔══════════════════════════════════╗\n" RESET, 1);
+	ft_putstr_fd(CYAN "║      MINITALK BONUS SERVER       ║\n" RESET, 1);
+	ft_putstr_fd(CYAN "╚══════════════════════════════════╝\n\n" RESET, 1);
+	ft_putstr_fd(CYAN "Server PID: " RESET, 1);
 	ft_putnbr(getpid());
-	ft_putstr("\n\n");
+	ft_putstr_fd("\n\n", 1);
 	sig.sa_sigaction = ft_signal_handler;
 	sig.sa_flags = SA_SIGINFO;
 	sigemptyset(&sig.sa_mask);

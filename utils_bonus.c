@@ -6,46 +6,41 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:42:19 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:17:12 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:43:35 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-void	ft_putchar(char c)
+void	ft_putchar_fd(char c, int fd)
 {
-	write(1, &c, 1);
-}
-
-void	ft_puterr(char *err)
-{
-	write(2, &err, 1);
+	write(fd, &c, 1);
 }
 
 void	ft_putnbr(int nbr)
 {
 	if (nbr == -2147483648)
 	{
-		ft_putstr("-2147483648");
+		ft_putstr_fd("-2147483648", 1);
 		return ;
 	}
 	if (nbr < 0)
 	{
-		ft_putchar('-');
+		ft_putchar_fd('-', 1);
 		nbr = -nbr;
 	}
 	if (nbr >= 10)
 		ft_putnbr(nbr / 10);
-	ft_putchar(nbr % 10 + '0');
+	ft_putchar_fd(nbr % 10 + '0', 1);
 }
 
-void	ft_putstr(char *str)
+void	ft_putstr_fd(char *str, int fd)
 {
 	if (!str)
 		return ;
 	while (*str)
 	{
-		ft_putchar(*str);
+		ft_putchar_fd(*str, fd);
 		str++;
 	}
 }

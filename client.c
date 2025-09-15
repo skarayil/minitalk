@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:13:16 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:37:32 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int	main(int ac, char *av[])
 
 	if (ac != 3)
 	{
-		ft_puterr("Usage: ./client <PID> <message>\n");
+		ft_putstr_fd("Usage: ./client <PID> <message>\n", 2);
 		return (1);
 	}
 	pid = ft_atoi(av[1]);
 	if (kill(pid, 0) == -1 || pid <= 0)
 	{
-		ft_puterr("err: Invalid PID\n");
+		ft_putstr_fd("err: Invalid PID\n", 2);
 		return (1);
 	}
 	ft_send_string(pid, av[2]);

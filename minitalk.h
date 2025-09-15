@@ -6,7 +6,7 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:51:31 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:13:16 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:51:02 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	ft_putnbr(int nbr);
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-void	ft_puterr(char *err);
 int		ft_atoi(const char *str);
+void	ft_putnbr(int nbr);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *str, int fd);
 
 #endif
