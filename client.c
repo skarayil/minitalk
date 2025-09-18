@@ -18,7 +18,7 @@ void	ft_send_bit(int pid, int bit)
 		kill(pid, SIGUSR1);
 	else
 		kill(pid, SIGUSR2);
-	usleep(300);
+	usleep(SLEEP_TIME);
 }
 
 void	ft_send_char(int pid, char c)
