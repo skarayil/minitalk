@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+#define SLEEP_TIME 300
+
 int		ft_atoi(const char *str);
 void	ft_putnbr(int nbr);
 void	ft_putchar_fd(char c, int fd);
