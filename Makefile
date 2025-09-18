@@ -27,30 +27,24 @@ bonus: $(BONUS_SERVER) $(BONUS_CLIENT)
 
 $(SERVER): $(SERVER_OBJ)
 	$(CC) $(CFLAGS) -o $(SERVER) $(SERVER_OBJ)
-	@echo "Server compiled successfully!"
 
 $(CLIENT): $(CLIENT_OBJ)
 	$(CC) $(CFLAGS) -o $(CLIENT) $(CLIENT_OBJ)
-	@echo "Client compiled successfully!"
 
 $(BONUS_SERVER): $(BONUS_SERVER_OBJ)
 	$(CC) $(CFLAGS) -o $(BONUS_SERVER) $(BONUS_SERVER_OBJ)
-	@echo "Server bonus compiled successfully!"
 
 $(BONUS_CLIENT): $(BONUS_CLIENT_OBJ)
 	$(CC) $(CFLAGS) -o $(BONUS_CLIENT) $(BONUS_CLIENT_OBJ)
-	@echo "Client bonus compiled successfully!"
 
 %.o: %.c minitalk.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(SERVER_OBJ) $(CLIENT_OBJ) $(BONUS_SERVER_OBJ) $(BONUS_CLIENT_OBJ)
-	@echo "Object files cleaned!"
 
 fclean: clean
 	@rm -f $(SERVER) $(CLIENT) $(BONUS_SERVER) $(BONUS_CLIENT)
-	@echo "All executables cleaned!"
 
 re: fclean all
 
