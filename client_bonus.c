@@ -5,53 +5,75 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/16 01:46:17 by skarayil         ###   ########.fr       */
+/*   Created: 2025/09/16 10:16:36 by skarayil          #+#    #+#             */
+/*   Updated: 2025/09/18 08:04:54 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-void	ft_send_bit(int pid, int bit)
+volatile sig_atomic_t	g_ack_received = 0;
+
+void	ft_ack_handler(int sig)
 {
-	if (bit == 1)
-		kill(pid, SIGUSR1);
-	else
-		kill(pid, SIGUSR2);
-	usleep(400);
+	(void)sig;
+	g_ack_received = 1;
 }
 
 void	ft_send_char(int pid, char c)
 {
-	int	i;
+	int	bit;
 
-	i = 0;
-	while (i < 8)
+	bit = 8;
+	while (bit--)
 	{
-		ft_send_bit(pid, (c >> i) & 1);
-		i++;
+		g_ack_received = 0;
+		if ((c >> bit) & 1)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		while (!g_ack_received)
+			pause();
 	}
 }
 
 void	ft_send_string(int pid, char *str)
 {
+	int	send_byte;
+
+	send_byte = 0;
 	while (*str)
 	{
 		ft_send_char(pid, *str);
+		send_byte++;
+		if (send_byte % 100 == 0)
+		{
+			ft_putstr_fd("\r\033[K" MAGENTA "Sent Bytes: " RESET, 1);
+			ft_putnbr(send_byte);
+		}
 		str++;
 	}
 	ft_send_char(pid, '\0');
+	send_byte++;
+	ft_putstr_fd("\r\033[K" MAGENTA "Sent Bytes: " RESET, 1);
+	ft_putnbr(send_byte);
+	ft_putchar_fd('\n', 1);
 }
 
-void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
+static int	ft_validate(int ac, char *av[], pid_t *pid)
 {
-	static int	send_byte;
-
-	(void)siginfo;
-	(void)oact;
-	if (signo == SIGUSR2)
-		ft_putstr_fd(MAGENTA "\rSent Bytes: " RESET, 1);
-	ft_putnbr(send_byte++);
+	if (ac != 3)
+	{
+		ft_putstr_fd(RED "Usage: ./client <PID> <message>\n" RESET, 2);
+		return (1);
+	}
+	*pid = ft_atoi(av[1]);
+	if (kill(*pid, 0) == -1 || *pid <= 0)
+	{
+		ft_putstr_fd(RED "Invalid PID!\n" RESET, 2);
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int ac, char *av[])
@@ -59,23 +81,18 @@ int	main(int ac, char *av[])
 	pid_t				pid;
 	struct sigaction	sig;
 
-	if (ac != 3)
-	{
-		ft_putstr_fd(RED "Usage: ./client <PID> <message>\n" RESET, 2);
+	if (ft_validate(ac, av, &pid))
 		return (1);
-	}
-	pid = ft_atoi(av[1]);
-	if (kill(pid, 0) == -1 || pid <= 0)
-	{
-		ft_putstr_fd(RED "Invalid PID!\n" RESET, 2);
-		return (1);
-	}
-	ft_putstr_fd(MAGENTA "PID: " RESET, 1);
+	ft_putstr_fd(MAGENTA "Client PID: " RESET, 1);
+	ft_putnbr(getpid());
+	ft_putchar_fd('\n', 1);
+	ft_putstr_fd(MAGENTA "Server PID: " RESET, 1);
 	ft_putnbr(pid);
-	ft_putstr_fd(MAGENTA "\nMessage: \"" RESET, 1);
-	sig.sa_flags = SA_SIGINFO;
-	sig.sa_sigaction = ft_signal_handler;
+	ft_putchar_fd('\n', 1);
+	sig.sa_handler = ft_ack_handler;
 	sigemptyset(&sig.sa_mask);
+	sig.sa_flags = SA_RESTART;
+	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
 	ft_send_string(pid, av[2]);
 	ft_putstr_fd(MAGENTA "\nMessage delivered!\n" RESET, 1);
