@@ -6,11 +6,13 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:59:50 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/18 07:52:57 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:48:29 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include <signal.h>
+#include <unistd.h>
 
 void	ft_signal_handler(int signal)
 {
