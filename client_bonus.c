@@ -70,7 +70,7 @@ static int	ft_validate(int ac, char *av[], pid_t *pid)
 	*pid = ft_atoi(av[1]);
 	if (kill(*pid, 0) == -1 || *pid <= 0)
 	{
-		ft_putstr_fd(RED "Invalid PID!\n" RESET, 2);
+		ft_putstr_fd(RED "Error: Invalid PID!\n" RESET, 2);
 		return (1);
 	}
 	return (0);
