@@ -6,11 +6,13 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:54:41 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/18 07:53:13 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:48:39 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+#include <signal.h>
+#include <unistd.h>
 
 void	ft_send_bit(int pid, int bit)
 {
