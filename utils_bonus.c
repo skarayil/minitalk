@@ -6,11 +6,12 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:42:19 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:43:35 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:52:35 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
+#include <unistd.h>
 
 void	ft_putchar_fd(char c, int fd)
 {
