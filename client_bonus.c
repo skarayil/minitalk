@@ -6,11 +6,13 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 10:16:36 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/18 08:04:54 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:52:52 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
+#include <signal.h>
+#include <unistd.h>
 
 volatile sig_atomic_t	g_ack_received = 0;
 
