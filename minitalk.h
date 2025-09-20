@@ -6,14 +6,12 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 10:51:31 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/15 20:51:02 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:51:08 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
-
-# include <signal.h>
 
 # define SLEEP_TIME 300
 
