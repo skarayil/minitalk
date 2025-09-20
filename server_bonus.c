@@ -12,29 +12,29 @@
 
 #include "minitalk_bonus.h"
 
-void	ft_print_message(int message_count, int sender_pid)
+void	ft_print_message(int message_count, int client)
 {
 	ft_putstr_fd(CYAN "\nMessage #", 1);
 	ft_putnbr(message_count);
 	ft_putstr_fd(CYAN " received successfully!\n" RESET, 1);
 	ft_putstr_fd(CYAN "From Client PID: ", 1);
-	ft_putnbr(sender_pid);
+	ft_putnbr(client);
 	ft_putstr_fd("\n", 1);
 	ft_putstr_fd("────────────────────────────────────\n\n", 1);
 }
 
-static void	ft_change_client(int *client_pid, int sig_pid)
+static void	ft_change_client(int *client_pid, int current_pid)
 {
-	if (*client_pid != sig_pid)
+	if (*client_pid != current_pid)
 	{
-		*client_pid = sig_pid;
+		*client_pid = current_pid;
 	}
 }
 
-static void	ft_process_byte(unsigned char *c, int *bit, int *client_pid,
+static void	ft_process_byte(unsigned char *byte, int *bit, int *client_pid,
 		int *message_count)
 {
-	if (*c == '\0')
+	if (*byte == '\0')
 	{
 		(*message_count)++;
 		ft_print_message(*message_count, *client_pid);
@@ -43,25 +43,25 @@ static void	ft_process_byte(unsigned char *c, int *bit, int *client_pid,
 		*client_pid = 0;
 	}
 	else
-		write(1, c, 1);
+		write(1, byte, 1);
 	*bit = 0;
-	*c = 0;
+	*byte = 0;
 }
 
 void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
 {
-	static unsigned char	c;
+	static unsigned char	byte;
 	static int				bit;
 	static int				client_pid;
 	static int				message_count;
 
 	(void)oact;
 	ft_change_client(&client_pid, siginfo->si_pid);
-	c <<= 1;
+	byte <<= 1;
 	if (signo == SIGUSR1)
-		c |= 1;
+		byte |= 1;
 	if (++bit == 8)
-		ft_process_byte(&c, &bit, &client_pid, &message_count);
+		ft_process_byte(&byte, &bit, &client_pid, &message_count);
 	kill(siginfo->si_pid, SIGUSR1);
 }
 
@@ -86,7 +86,7 @@ int	main(int ac, char *av[])
 	sigemptyset(&sig.sa_mask);
 	sigaction(SIGUSR1, &sig, NULL);
 	sigaction(SIGUSR2, &sig, NULL);
-	while (1)
+	while (42)
 		pause();
 	return (0);
 }
