@@ -14,7 +14,6 @@
 # define MINITALK_H
 
 # include <signal.h>
-# include <unistd.h>
 
 # define SLEEP_TIME 300
 
