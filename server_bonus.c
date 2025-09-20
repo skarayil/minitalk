@@ -48,14 +48,14 @@ static void	ft_process_byte(unsigned char *byte, int *bit, int *client_pid,
 	*byte = 0;
 }
 
-void	ft_signal_handler(int signo, siginfo_t *siginfo, void *oact)
+void	ft_signal_handler(int signo, siginfo_t *siginfo, void *context)
 {
 	static unsigned char	byte;
 	static int				bit;
 	static int				client_pid;
 	static int				message_count;
 
-	(void)oact;
+	(void)context;
 	ft_change_client(&client_pid, siginfo->si_pid);
 	byte <<= 1;
 	if (signo == SIGUSR1)
