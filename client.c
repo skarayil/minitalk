@@ -55,7 +55,7 @@ int	main(int ac, char *av[])
 	pid = ft_atoi(av[1]);
 	if (kill(pid, 0) == -1 || pid <= 0)
 	{
-		ft_putstr_fd("err: Invalid PID\n", 2);
+		ft_putstr_fd("Error: Invalid PID\n", 2);
 		return (1);
 	}
 	ft_send_string(pid, av[2]);
