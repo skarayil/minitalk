@@ -6,11 +6,13 @@
 /*   By: skarayil <skarayil@student.42kocaeli>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 10:15:01 by skarayil          #+#    #+#             */
-/*   Updated: 2025/09/18 07:53:01 by skarayil         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:51:48 by skarayil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
+#include <signal.h>
+#include <unistd.h>
 
 void	ft_print_message(int message_count, int client)
 {
