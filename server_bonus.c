@@ -16,11 +16,11 @@ void	ft_print_message(int message_count, int client)
 {
 	ft_putstr_fd(CYAN "\nMessage #", 1);
 	ft_putnbr(message_count);
-	ft_putstr_fd(CYAN " received successfully!\n" RESET, 1);
-	ft_putstr_fd(CYAN "From Client PID: ", 1);
+	ft_putstr_fd(" received successfully!\n" RESET, 1);
+	ft_putstr_fd(CYAN "From Client PID: " RESET, 1);
 	ft_putnbr(client);
-	ft_putstr_fd("\n", 1);
-	ft_putstr_fd("────────────────────────────────────\n\n", 1);
+	ft_putstr_fd(RESET "\n", 1);
+	ft_putstr_fd("────────────────────────────────────\n\n" RESET, 1);
 }
 
 static void	ft_change_client(int *client_pid, int current_pid)
@@ -36,6 +36,7 @@ static void	ft_process_byte(unsigned char *byte, int *bit, int *client_pid,
 {
 	if (*byte == '\0')
 	{
+		ft_putstr_fd(RESET, 1);
 		(*message_count)++;
 		ft_print_message(*message_count, *client_pid);
 		write(1, "\n", 1);
