@@ -19,7 +19,7 @@
 
 ## 🎯 Projenin Amacı
 
-<img align="right" alt="Signal Communication Animation" width="300" src="https://media.giphy.com/media/3o7btPCcdNniyf0ArS/giphy.gif">
+<img align="right" alt="Signal Communication Animation" width="300" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjFweGVuaTZiY2h0cjczNjVuZDZyc2s5a3d3dWVieDVubHkzcDQzcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kl5ctZSctCbE4/giphy.gif">
 
 Bu proje, **Unix sinyallerini kullanarak client-server mimarisi** ile iki süreç arasında veri iletişimi kurma amacı taşır. Proje, sistem programlamanın temel kavramlarını öğretir:
 
@@ -709,28 +709,7 @@ valgrind --tool=memcheck ./client [PID] "test"
 
 </div>
 
-### 🎖️ **Kazanılan Yetenekler**
 
-#### 🔧 **Technical Skills:**
-- Unix signal programming ve IPC mechanisms
-- Binary encoding/decoding algorithms
-- Asynchronous event handling
-- Process management ve PID operations
-- Error handling ve fault tolerance
-- Memory management ve resource cleanup
-
-#### 🏗️ **System Programming:**
-- Low-level system call usage
-- Signal safety ve async-signal-safe programming
-- Race condition prevention
-- Client-server architecture design
-- Protocol design ve implementation
-
-#### 🧪 **Testing & Debugging:**
-- Signal flow debugging techniques
-- System monitoring ve performance analysis
-- Edge case testing methodologies
-- Memory leak detection ve prevention
 
 ---
 
