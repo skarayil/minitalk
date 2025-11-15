@@ -6,8 +6,8 @@ CFLAGS = -Wall -Wextra -Werror
 SERVER = server
 CLIENT = client
 
-SERVER_SRC = server.c utils.c
-CLIENT_SRC = client.c utils.c
+SERVER_SRC = mandatory/server.c mandatory/utils.c
+CLIENT_SRC = mandatory/client.c mandatory/utils.c
 
 SERVER_OBJ = $(SERVER_SRC:.c=.o)
 CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
@@ -15,8 +15,8 @@ CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
 BONUS_SERVER = server_bonus
 BONUS_CLIENT = client_bonus
 
-BONUS_SERVER_SRC = server_bonus.c utils_bonus.c
-BONUS_CLIENT_SRC = client_bonus.c utils_bonus.c
+BONUS_SERVER_SRC = bonus/server_bonus.c bonus/utils_bonus.c
+BONUS_CLIENT_SRC = bonus/client_bonus.c bonus/utils_bonus.c
 
 BONUS_SERVER_OBJ = $(BONUS_SERVER_SRC:.c=.o)
 BONUS_CLIENT_OBJ = $(BONUS_CLIENT_SRC:.c=.o)
